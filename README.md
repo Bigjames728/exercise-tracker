@@ -14,3 +14,5 @@
  React JS
  Node JS
  JavaScript
+
+ After download, start server with nodemon and start client with npm start.
