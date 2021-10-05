@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 
 
+
 export default function ExercisesList() {
 
     const [exercises, setExercises] = useState([]);
@@ -36,7 +37,7 @@ export default function ExercisesList() {
         
         <div>
             <h3>Logged Exercises</h3>
-            <table className="table">
+            <table className="table table-striped">
                 <thead className="thead-light">
                     <tr>
                         <th>Username</th>
