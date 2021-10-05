@@ -4,10 +4,10 @@ import { Container, Navbar, Nav } from 'react-bootstrap'
 export default class NavBar extends Component {
     render() {
         return (
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="primary" variant="dark">
                 <Container>
-                <Navbar.Brand href="/">ExerTracker</Navbar.Brand>
-                    <Nav className="me-auto">
+                <Navbar.Brand href="/">Exercise Tracker</Navbar.Brand>
+                    <Nav className="mr-auto">
                         <Nav.Link href="/">Exercises</Nav.Link>
                         <Nav.Link href="/create">Create Exercise</Nav.Link>
                         <Nav.Link href="/user">Create User</Nav.Link>
