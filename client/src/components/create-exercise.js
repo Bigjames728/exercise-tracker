@@ -47,8 +47,8 @@ function CreateExercise () {
         console.log(error);
       })
   }, [])
-  // console.log(typeof users);
-  // console.log(users);
+  console.log(typeof users);
+  console.log(users);
 
   
   const onUsernameChange = (e) => setUsername(e.target.value);
@@ -68,7 +68,7 @@ function CreateExercise () {
         date
     }
 
-    // console.log(data);
+    console.log(data);
 
     const requestOptions = {
       method: 'POST',
@@ -77,7 +77,7 @@ function CreateExercise () {
     };
     fetch('http://localhost:5000/exercises/add', requestOptions)
       .then(response => response.json())
-      // .then(res => console.log(res))
+      .then(res => console.log(res))
       .catch(error => console.log("Error fetching and parsing data " + error))
     
     history.push('/');

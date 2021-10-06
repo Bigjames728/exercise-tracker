@@ -25,7 +25,7 @@ export default function EditExercise(props) { // By passing props into the funct
                 setDescription(response.description)
                 setDuration(response.duration)
                 setDate(new Date(response.date))
-                // console.log(response)
+                console.log(response)
             })
           })
           .catch((error) => {
@@ -60,7 +60,7 @@ export default function EditExercise(props) { // By passing props into the funct
             users
         }
     
-        // console.log(editedExercise);
+        console.log(editedExercise);
 
         const id = props.match.params.id;
     
@@ -71,7 +71,7 @@ export default function EditExercise(props) { // By passing props into the funct
         };
         fetch(`http://localhost:5000/exercises/update/${id}`, requestOptions)
           .then(response => response.json())
-        //   .then(res => console.log(res))
+          .then(res => console.log(res))
           .catch(error => console.log("Error fetching and parsing data " + error))
         
         history.push('/');
