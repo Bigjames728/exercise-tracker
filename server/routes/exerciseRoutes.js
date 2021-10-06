@@ -1,52 +1,13 @@
 var express = require('express');
 var router = express.Router();
 let Exercise = require('../models/exercise-model');
-const JWT_SECRET = 'djflsen;avn;sunen;uoerhf;asj;ejrh98734n;klfjsah34987yawsf4ejkf';
-let User = require('../models/user-model');
 
 
-// GET EXERCISES - home page
+// GET EXERCISES
 router.get('/', function(req, res, next) {
-
-    const token = req.headers['x-access-token']
-    
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET)
-        const email = decoded.email
-        const user = await User.findOne({ email: email })
-
-        return res.json({ status: 'ok', exercise: user.exercise  })
-    } catch (error) {
-        console.log(error)
-        res.json({ status: 'error', error: 'invalid token' })
-    }
-    // Exercise.find()
-    // .then(exercises => res.json(exercises))
-    // .catch(err => res.status(400).json('Error:' + err));
-});
-
-router.post('/add', function(req, res, next) {
-
-    const token = req.headers['x-access-token']
-    
-
-    try {
-        const decoded = jwt.verify(token, JWT_SECRET)
-        const email = decoded.email
-        const user = await User.updateOne(
-            { email: email },
-            { $set: { exercise: req.body.exercise } }
-        )
-
-        return { status: 'ok' }
-    } catch (error) {
-        console.log(error)
-        res.json({ status: 'error', error: 'invalid token' })
-    }
-    // Exercise.find()
-    // .then(exercises => res.json(exercises))
-    // .catch(err => res.status(400).json('Error:' + err));
+  Exercise.find()
+    .then(exercises => res.json(exercises))
+    .catch(err => res.status(400).json('Error:' + err));
 });
 
 
@@ -59,19 +20,19 @@ router.get('/:id', (req, res) => {
 
 
 // CREATE EXERCISE
-// router.post('/add', (req, res, next) => {
-//   const { username, description, duration, date } = req.body;
+router.post('/add', (req, res, next) => {
+  const { username, description, duration, date } = req.body;
 
-//   const newExercise = new Exercise({
-//       username,
-//       description,
-//       duration,
-//       date
-//   })
-//   newExercise.save()
-//     .then(() => res.json(newExercise))
-//     .catch((err) => res.status(400).json('Error: ' + err));
-// });
+  const newExercise = new Exercise({
+      username,
+      description,
+      duration,
+      date
+  })
+  newExercise.save()
+    .then(() => res.json(newExercise))
+    .catch((err) => res.status(400).json('Error: ' + err));
+});
 
 
 // UPDATE EXERCISE

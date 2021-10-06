@@ -100,7 +100,6 @@ function CreateExercise () {
               }
           </select>
         </div>
-        <br />
         <div className="form-group"> 
           <label>Description: </label>
           <input 
@@ -111,7 +110,6 @@ function CreateExercise () {
               onChange={onDescriptionChange}
               />
         </div>
-        <br />
         <div className="form-group">
           <label>Duration (in minutes): </label>
           <input 
@@ -121,7 +119,6 @@ function CreateExercise () {
               onChange={onDurationChange}
               />
         </div>
-        <br />
         <div className="form-group">
           <label>Date: </label>
           <div>
@@ -131,7 +128,7 @@ function CreateExercise () {
             />
           </div>
         </div>
-        <br />
+
         <div className="form-group">
           <input type="submit" value="Create Exercise!" className="btn btn-primary" />
         </div>
