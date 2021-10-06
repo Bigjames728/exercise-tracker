@@ -1,78 +1,47 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router';
-
 export default function CreateUser() {
 
     let history = useHistory();
 
     const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const onEmailChange = (e) => setEmail(e.target.value);
-    const onUsernameChange = (e) => setUsername(e.target.value);
     const onPasswordChange = (e) => setPassword(e.target.value);
-
-    
-
 
     async function handleSubmit (e) {
 
         e.preventDefault();
     
-        const response = await fetch('http://localhost:5000/users/register', {
+        const response = await fetch('http://localhost:5000/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 email,
-                username,
                 password
             }),
         })
 
         const data = await response.json()
 
-        console.log(data.status);
-        if(data.status === 'ok') {
-            history.push('/login');
-        } 
+        console.log(data.user);
+        if(data.user) {
+            localStorage.setItem('token', data.user)
+            alert('Login successful!')
+            window.location.href = '/';
+        } else {
+            alert('Please check your username and password.')
+        }
         
-        
-
-    // e.preventDefault();
-
-    // const newUser = {
-    //     email,
-    //     username,
-    //     password
-    // }
-
-    // console.log(newUser);
-
-    // const requestOptions = {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(newUser)
-    // };
-    // fetch('http://localhost:5000/users/register', requestOptions)
-    //   .then(response => response.json())
-    //   .then(res => console.log(res))
-    //   .catch(error => console.log("Error fetching and parsing data " + error))
-    
-    // history.push('/');
-
-
+        // history.push('/');
     }
-
-
-        
-    
     
     return (
         <div>
-            <h3>Create New User</h3>
+            <h3>Login</h3>
             <form onSubmit={handleSubmit}>
                 <div className="form-group"> 
                 <label>Email: </label>
@@ -81,16 +50,6 @@ export default function CreateUser() {
                     className="form-control"
                     value={email}
                     onChange={onEmailChange}
-                    />
-                </div>
-                <br />
-                <div className="form-group"> 
-                <label>Username: </label>
-                <input  type="text"
-                    required
-                    className="form-control"
-                    value={username}
-                    onChange={onUsernameChange}
                     />
                 </div>
                 <br />
@@ -106,10 +65,9 @@ export default function CreateUser() {
                 </div>
                 <br />
                 <div className="form-group">
-                <input type="submit" value="Create User" className="btn btn-primary" />
+                <input type="submit" value="Login" className="btn btn-primary" />
                 </div>
             </form>
         </div>
     )
 }
-

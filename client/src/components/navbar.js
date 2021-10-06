@@ -10,7 +10,7 @@ export default class NavBar extends Component {
                     <Nav className="mr-auto">
                         <Nav.Link href="/">Exercises</Nav.Link>
                         <Nav.Link href="/create">Create Exercise</Nav.Link>
-                        <Nav.Link href="/user">Create User</Nav.Link>
+                        <Nav.Link href="/register">Create User</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

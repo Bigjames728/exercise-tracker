@@ -1,23 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import jwt from 'jsonwebtoken';
+import { useHistory } from 'react-router-dom';
 
 
 
-export default function ExercisesList() {
+export default function Dashboard() {
+
+    const history = useHistory();
 
     const [exercises, setExercises] = useState([]);
 
+    async function getExercises () {
+        const req = await fetch('http://localhost:5000/exercises', {
+            headers: {
+                'x-access-token': localStorage.getItem('token'),
+            },
+        });
+        const data = req.json()
+        if(data.status === 'ok') {
+            setExercises(data.exercise)
+        } else {
+            alert(data.error)
+        }
+        console.log(data);
+        
+    }
+    
     useEffect(() => {
-        getExercises();
+        const token = localStorage.getItem('token')
+        if (token) {
+            const user = jwt.decode(token)
+            console.log(user)
+            if(!user) {
+                localStorage.removeItem('token')
+                history.replace('/login')
+            } else {
+                getExercises();
+            }
+        }
     }, []) 
 
 
-    async function getExercises () {
-        const response = await fetch('http://localhost:5000/exercises');
-        const body = await response.json()
-        // console.log(body);
-        setExercises(body);
-    }
+    
 
 
     function deleteExercise(_id){

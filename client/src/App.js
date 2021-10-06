@@ -1,12 +1,13 @@
 import React from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import NavBar from './components/navbar';
-import ExercisesList from './components/exercises-list';
+import Dashboard from './components/dashboard';
 import EditExercise from './components/edit-exercise';
 import CreateExercise from './components/create-exercise';
 import CreateUser from './components/create-user';
+import Login from './components/login-user';
 
 function App() {
   return (
@@ -14,10 +15,12 @@ function App() {
       <div className="container">
         <NavBar />
           <br/>
-            <Route path="/" exact component={ExercisesList} />
+            <Route exact path="/" render={() => <Redirect to="/dashboard" />} />
+            <Route path="/login" exact component={Login} />
+            <Route path="/dashboard" exact component={Dashboard} />
             <Route path="/edit/:id" exact component={EditExercise} />
             <Route path="/create" exact component={CreateExercise} />
-            <Route path="/user" exact component={CreateUser} />
+            <Route path="/register" exact component={CreateUser} />
       </div>
     </Router>
   );
