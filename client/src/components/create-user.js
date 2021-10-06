@@ -23,7 +23,7 @@ export default function CreateUser() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newUser)
         };
-        fetch('http://localhost:5000/users/add', requestOptions)
+        fetch('http://localhost:5000/users/register', requestOptions)
           .then(response => response.json())
           .then(res => console.log(res))
           .catch(error => console.log("Error fetching and parsing data " + error))
