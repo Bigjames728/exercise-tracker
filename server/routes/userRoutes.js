@@ -19,13 +19,27 @@ router.get('/register', function(req, res, next) {
 
 // CREATE USER - When calling this method on the front end, the data should be added to the database
 router.post('/register', (req, res, next) => {
-  const username = req.body.username;
+  
+  if (req.body.email && req.body.username && req.body.password) {
+    const newUserData = {
+      email: req.body.email,
+      username: req.body.username,
+      password: req.body.password
+    };
 
-  const newUser = new User({username});
-
-  newUser.save()
-    .then(() => res.json(newUser))
-    .catch((err) => res.status(400).json('Error:' + err));
+    // use schema's 'create' method to insert the document into MongoDB
+    User.create(newUserData, function (error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        return res.json(newUserData);
+      }
+    })
+  } else {
+    var err = new Error('All fields required.');
+    err.status = 400;
+    return next(err);
+  }
 });
 
 module.exports = router;
