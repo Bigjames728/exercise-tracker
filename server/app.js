@@ -26,7 +26,8 @@ app.use(session({
   secret: 'exercise tracker',
   resave: true,
   saveUninitialized: false,
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection,
+                          ttl: 2 * 24 * 60 * 60 })
 }));
 
 
