@@ -5,6 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
+var session = require('express-session');
+
+
 
 require('dotenv').config();
 
@@ -16,6 +19,14 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// use sessions for tracking logins
+app.use(session({
+  secret: 'exercise tracker',
+  resave: true,
+  saveUninitialized: false
+}));
+
 
 app.use(logger('dev'));
 app.use(express.json());
