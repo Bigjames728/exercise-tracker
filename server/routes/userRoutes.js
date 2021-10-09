@@ -10,11 +10,16 @@ router.get('/', function(req, res, next) {
 });
 
 // GET USERS - when calling this method on the front end, the user should be seeing the registration form 
-router.get('/register', function(req, res, next) {
-  User.find()
-    .then(users => res.json(users))
-    .catch(err => res.status(400).json('Error:' + err));
-});
+// router.get('/register', function(req, res, next) {
+//   User.find()
+//     .then(users => res.json(users))
+//     .catch(err => res.status(400).json('Error:' + err));
+// });
+
+// This should post data to the /login route after a user logs in - need to create a login form on front end for this end point
+router.post('/login', function(req, res, next) {
+  return res.send('Logged in!');
+})
 
 
 // CREATE USER - When calling this method on the front end, the data should be added to the database
