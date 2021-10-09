@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cors = require('cors');
 const mongoose = require('mongoose');
 var session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
 
 
@@ -24,7 +25,8 @@ app.set('view engine', 'jade');
 app.use(session({
   secret: 'exercise tracker',
   resave: true,
-  saveUninitialized: false
+  saveUninitialized: false,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 
