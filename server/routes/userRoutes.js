@@ -42,8 +42,6 @@ router.post('/login', function(req, res, next) {
         const sessUser = { id: user._id, email: user.email, username: user.username };
         req.session.user = sessUser;
         return res.json({ msg: "Logged in successfully", sessUser });
-        // console.log(req.session.userId);
-        // console.log(req.session);
       }
     });
   } else {
