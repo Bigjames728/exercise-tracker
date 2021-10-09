@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 
 // This should post data to the /login route after a user logs in - need to create a login form on front end for this end point
 router.post('/login', function(req, res, next) {
-  return res.send('Logged in!');
+  return res.json('Logged in!');
 })
 
 
