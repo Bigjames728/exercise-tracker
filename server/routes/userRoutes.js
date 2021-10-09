@@ -38,9 +38,12 @@ router.post('/login', function(req, res, next) {
         err.status = 401;
         return next(err);
       } else {
-        req.session.userId = user._id;
-        console.log(req.session.userId);
-        console.log(req.session);
+        // req.session.userId = user._id;
+        const sessUser = { id: user._id, email: user.email, username: user.username };
+        req.session.user = sessUser;
+        return res.json({ msg: "Logged in successfully", sessUser });
+        // console.log(req.session.userId);
+        // console.log(req.session);
       }
     });
   } else {
