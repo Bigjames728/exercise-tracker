@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     .catch(err => res.status(400).json('Error:' + err));
 });
 
-// This should respond/return the logged in persons session as an object I think for me to access from the front end where I call this endpoint
+// Not sure what this is for yet. This should respond/return the logged in persons session as an object I think for me to access from the front end where I call this endpoint
 router.get('/userData', function(req, res, next) {
   if (! req.session.userId) {
     var err = new Error("You are not authorized to view this page.");
