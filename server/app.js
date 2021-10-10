@@ -21,7 +21,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// use sessions for tracking logins
+// use sessions for tracking logins - keeping this for now even though starting over with /login endpoint
 app.use(session({
   secret: 'exercise tracker',
   resave: true,

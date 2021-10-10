@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-// import { useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 
 export default function CreateUser() {
 
-    // let history = useHistory();
+    let history = useHistory();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -11,6 +11,7 @@ export default function CreateUser() {
     const onEmailChange = (e) => setEmail(e.target.value);
     const onPasswordChange = (e) => setPassword(e.target.value);
 
+    // This won't work until I build the /login endpoint
     const handleSubmit = e => {
 
         e.preventDefault();
@@ -32,8 +33,8 @@ export default function CreateUser() {
           .then(res => console.log(res))
           .catch(error => console.log("Error fetching and parsing data " + error))
         
-        // history.push('/');
-      }
+        // history.push('/test');
+    }
     
     return (
         <div>
