@@ -13,26 +13,46 @@ router.get('/', function(req, res, next) {
 // CREATE USER - When calling this method on the front end, the data should be added to the database
 router.post('/register', (req, res, next) => {
   
-  if (req.body.email && req.body.username && req.body.password) {
-    const newUserData = {
-      email: req.body.email,
-      username: req.body.username,
-      password: req.body.password
-    };
+  const user = {
+    email: req.body.email,
+    username: req.body.username,
+    password: req.body.password
+  }
+  const newUser = new User(user);
+  req.session.user = user._id;
+  newUser
+    .save()
+    .then((result) => {
+      res.json({
+        message: "Successfully created user.",
+        auth: true,
+      });
+    })
+    .catch((err) => {
+      res.json({
+        message: "Unable to create account.",
+        auth: false,
+      });
+    });
+});
 
-    // use schema's 'create' method to insert the document into MongoDB
-    User.create(newUserData, function (error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        return res.json(newUserData);
-      }
+// Login route
+router.post('/auth/login', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findUser(email, password);
+  if (user) {
+    req.session.user = user._id;
+    res.json({
+      message: "You are successfully logged in.",
+      auth: true,
     })
   } else {
-    var err = new Error('All fields required.');
-    err.status = 400;
-    return next(err);
+    res.json({
+      message: "Unable to login.",
+      auth: false,
+    })
   }
+  console.log(user)
 });
 
 module.exports = router;

@@ -6,9 +6,11 @@ export default function CreateUser() {
     let history = useHistory();
 
     const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     const onEmailChange = (e) => setEmail(e.target.value);
+    const onUsernameChange = (e) => setUsername(e.target.value);
     const onPasswordChange = (e) => setPassword(e.target.value);
 
     // This won't work until I build the /login endpoint
@@ -18,6 +20,7 @@ export default function CreateUser() {
     
         const loggedInUser = {
             email,
+            username,
             password
         }
     
@@ -47,6 +50,16 @@ export default function CreateUser() {
                     className="form-control"
                     value={email}
                     onChange={onEmailChange}
+                    />
+                </div>
+                <br />
+                <div className="form-group"> 
+                <label>Username: </label>
+                <input  type="text"
+                    required
+                    className="form-control"
+                    value={username}
+                    onChange={onUsernameChange}
                     />
                 </div>
                 <br />
