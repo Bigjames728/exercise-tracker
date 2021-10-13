@@ -55,4 +55,7 @@ router.post('/auth/login', async (req, res) => {
   console.log(user)
 });
 
+// Need to add a loggedin route still to call in a useEffect in app.js so that I don't logout on page refresh
+
+
 module.exports = router;
